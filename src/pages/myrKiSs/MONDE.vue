@@ -1,4 +1,206 @@
 <script setup>
+const ranks = ref([
+  '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
+])
+
+const suits = ref([
+  'C', 'D', 'S', 'W',
+])
+
+const deck = ref([])
+const deckLoaded = ref(false)
+
+function loadDeck() {
+  deck.value = []
+
+  for (let s = 0; s < suits.value.length; s++) {
+    for (let r = 0; r < ranks.value.length; r++) {
+      const card = {
+        cardKey: ranks.value[r] + suits.value[s],
+        rank: ranks.value[r],
+        suit: suits.value[s],
+      }
+      deck.value.push(card)
+      // eslint-disable-next-line no-console
+      console.log(`loading card ${card.cardKey}`)
+    }
+  }
+  deckLoaded.value = true
+  // eslint-disable-next-line no-console
+  console.log('deck loaded')
+}
+
+function deal() {
+  const dealtCard = deck.value.pop()
+  // eslint-disable-next-line no-alert
+  alert(dealtCard.cardKey)
+  if (deck.value.length < 1)
+    deckLoaded.value = false
+}
+
+// const allCards = ref([
+//   {
+//     cardKey: '1C',
+//     image: '/images/1C.jpg',
+//   },
+//   {
+//     cardKey: '1D',
+//     image: '/images/1D.jpg',
+//   },
+//   {
+//     cardKey: '1S',
+//     image: '/images/1S.jpg',
+//   },
+//   {
+//     cardKey: '1W',
+//     image: '/images/1W.jpg',
+//   },
+//   {
+//     cardKey: '2C',
+//     image: '/images/2C.jpg',
+//   },
+//   {
+//     cardKey: '2D',
+//     image: '/images/2D.jpg',
+//   },
+//   {
+//     cardKey: '2S',
+//     image: '/images/2S.jpg',
+//   },
+//   {
+//     cardKey: '2W',
+//     image: '/images/2W.jpg',
+//   },
+//   {
+//     cardKey: '3C',
+//     image: '/images/3C.jpg',
+//   },
+//   {
+//     cardKey: '3D',
+//     image: '/images/3D.jpg',
+//   },
+//   {
+//     cardKey: '3S',
+//     image: '/images/3S.jpg',
+//   },
+//   {
+//     cardKey: '3W',
+//     image: '/images/3W.jpg',
+//   },
+//   {
+//     cardKey: '4C',
+//     image: '/images/4C.jpg',
+//   },
+//   {
+//     cardKey: '4D',
+//     image: '/images/4D.jpg',
+//   },
+//   {
+//     cardKey: '4S',
+//     image: '/images/4S.jpg',
+//   },
+//   {
+//     cardKey: '4W',
+//     image: '/images/4W.jpg',
+//   },
+//   {
+//     cardKey: '5C',
+//     image: '/images/5C.jpg',
+//   },
+//   {
+//     cardKey: '5D',
+//     image: '/images/5D.jpg',
+//   },
+//   {
+//     cardKey: '5S',
+//     image: '/images/5S.jpg',
+//   },
+//   {
+//     cardKey: '5W',
+//     image: '/images/5W.jpg',
+//   },
+//   {
+//     cardKey: '6C',
+//     image: '/images/6C.jpg',
+//   },
+//   {
+//     cardKey: '6D',
+//     image: '/images/6D.jpg',
+//   },
+//   {
+//     cardKey: '6S',
+//     image: '/images/6S.jpg',
+//   },
+//   {
+//     cardKey: '6W',
+//     image: '/images/6W.jpg',
+//   },
+//   {
+//     cardKey: '7C',
+//     image: '/images/7C.jpg',
+//   },
+//   {
+//     cardKey: '7D',
+//     image: '/images/7D.jpg',
+//   },
+//   {
+//     cardKey: '7S',
+//     image: '/images/7S.jpg',
+//   },
+//   {
+//     cardKey: '7W',
+//     image: '/images/7W.jpg',
+//   },
+//   {
+//     cardKey: '8C',
+//     image: '/images/8C.jpg',
+//   },
+//   {
+//     cardKey: '8D',
+//     image: '/images/8D.jpg',
+//   },
+//   {
+//     cardKey: '8S',
+//     image: '/images/8S.jpg',
+//   },
+//   {
+//     cardKey: '8W',
+//     image: '/images/8W.jpg',
+//   },
+//   {
+//     cardKey: '9C',
+//     image: '/images/9C.jpg',
+//   },
+//   {
+//     cardKey: '9D',
+//     image: '/images/9D.jpg',
+//   },
+//   {
+//     cardKey: '9S',
+//     image: '/images/9S.jpg',
+//   },
+//   {
+//     cardKey: '9W',
+//     image: '/images/9W.jpg',
+//   },
+//   {
+//     cardKey: '10C',
+//     image: '/images/10C.jpg',
+//   },
+//   {
+//     cardKey: '10D',
+//     image: '/images/10D.jpg',
+//   },
+//   {
+//     cardKey: '10S',
+//     image: '/images/10S.jpg',
+//   },
+//   {
+//     cardKey: '10W',
+//     image: '/images/10W.jpg',
+//   },
+// ])
+
 const leftTopSelected = ref(false)
 const middleTopSelected = ref(false)
 const rightTopSelected = ref(false)
@@ -39,6 +241,18 @@ function rightBottomSelect() {
 
     <div class="buttonsMiddle">
       buttonsMiddle
+      <button
+        v-if="!deckLoaded.value"
+        @click="loadDeck"
+      >
+        shuffle
+      </button>
+      <button
+        v-else
+        @click="deal"
+      >
+        deal
+      </button>
     </div>
 
     <div class="buttonsRight">
