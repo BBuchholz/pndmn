@@ -1,11 +1,16 @@
+<script setup>
+import LorePiece from '../../components/LorePiece.vue'
+</script>
+
 <template>
+  <LorePiece />
   <div>
-    <a
-      href="https://truthfully-cyclopean-barracks.netlify.app/"
-      target="_blank"
+    <!-- <a href="https://cgba.netlify.app/" target="_blank"> -->
+    <img
+      class="card"
+      src="https://madamadam.s3.us-east-2.amazonaws.com/LP-20ce_CARDS.png"
     >
-      <img class="card" src="/Myriad_Central.png">
-    </a>
+    <!-- </a> -->
   </div>
 </template>
 

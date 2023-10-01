@@ -1,8 +1,11 @@
 <template>
   <div>
-    <a href="https://anxious-grove.netlify.app/" target="_blank">
-      <img class="card" src="/ADMITONE-aee5.png">
-    </a>
+    <!-- <a href="https://cgba.netlify.app/" target="_blank"> -->
+    <img
+      class="card"
+      src="https://madamadam.s3.us-east-2.amazonaws.com/LP-20ce_CARDS.png"
+    >
+    <!-- </a> -->
   </div>
 </template>
 

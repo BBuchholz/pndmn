@@ -1,8 +1,11 @@
 <template>
   <div>
-    <a href="https://a-myriad-ov-services.netlify.app/" target="_blank">
-      <img class="card" src="/AMOS-47cb_CARD.png">
-    </a>
+    <!-- <a href="https://cgba.netlify.app/" target="_blank"> -->
+    <img
+      class="card"
+      src="https://madamadam.s3.us-east-2.amazonaws.com/TAROG-05d8_CARD.png"
+    >
+    <!-- </a> -->
   </div>
 </template>
 
