@@ -156,3 +156,64 @@ export const allCards = ref([
     sign: 'Sagittarius',
   },
 ])
+
+export function getCardByName(aCardName) {
+  for (const card of allCards.value) {
+    if (card.cardName === aCardName)
+      return card
+  }
+
+  return null
+}
+
+export function getPotentialMatchesFor(cardName) {
+  const thaCard = getCardByName(cardName)
+
+  if (!thaCard)
+    return 'no matches found'
+
+  const matches = []
+
+  for (const card of allCards.value) {
+    if (card.cardName !== thaCard.cardName) {
+      // modality
+      if (card.modality.trim()
+        && card.modality === thaCard.modality)
+        matches.push(card.cardName)
+      // element
+      if (card.element.trim()
+        && card.element === thaCard.element)
+        matches.push(card.cardName)
+      // planet
+      if (card.planet.trim()
+        && card.planet === thaCard.planet)
+        matches.push(card.cardName)
+      // sign
+      if (card.sign.trim()) {
+        // just need to make sure whichever doesn't have
+        // a comma is tested for being inside the one
+        // that MIGHT have a comma (doesn't matter if it does
+        // just need to make sure the other one doesn't)
+
+        if (card.sign.includes(',')) {
+          if (thaCard.sign.trim()
+            && card.sign.includes(thaCard.sign))
+            matches.push(card.cardName)
+        }
+        else {
+          if (card.sign.trim()
+            && thaCard.sign.includes(card.sign))
+            matches.push(card.cardName)
+        }
+      }
+    }
+  }
+
+  if (!matches || matches.length < 1)
+    return 'no matches found'
+
+  // remove duplicates
+  const unique = [...new Set(matches)]
+
+  return unique.join(', ')
+}
