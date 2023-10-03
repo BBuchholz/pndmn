@@ -17,5 +17,8 @@ test('should get card by name', () => {
 
 test('something', () => {
   expect(getPotentialMatchesFor('Sun')).toBe('Star')
-  expect(getPotentialMatchesFor('Emperor')).toBe('Star')
+  expect(getPotentialMatchesFor('Tower')).toContain('Hermit')
+  expect(getPotentialMatchesFor('Tower')).toContain('Emperor')
+  expect(getPotentialMatchesFor('Emperor')).toContain('Le Mat')
+  expect(getPotentialMatchesFor('Chariot')).toContain('Devil')
 })

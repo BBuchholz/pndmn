@@ -1,9 +1,33 @@
 <script setup>
-import { allCards } from './allCards'
+import {
+  allCards,
+  getPotentialMatchesFor,
+} from './allCards'
+
+let matches = $ref('')
+
+function nameClicked(cardName) {
+  matches = `Matches for ${cardName}: ${getPotentialMatchesFor(cardName)}`
+}
+
+function matchesClicked() {
+  matches = ''
+}
 </script>
 
 <template>
-  <div class="display">
+  <div
+    v-if="matches.trim()"
+    class="display"
+    @click="matchesClicked"
+  >
+    {{ matches }}
+    (click here to return to table)
+  </div>
+  <div
+    v-if="!matches.trim()"
+    class="display"
+  >
     <table>
       <thead>
         <tr>
@@ -15,8 +39,15 @@ import { allCards } from './allCards'
         </tr>
       </thead>
       <tbody>
-        <tr v-for="aCard in allCards" :key="aCard.cardName">
-          <td>{{ aCard.cardName }}</td>
+        <tr
+          v-for="aCard in allCards"
+          :key="aCard.cardName"
+        >
+          <td
+            @click="nameClicked(aCard.cardName)"
+          >
+            {{ aCard.cardName }}
+          </td>
           <td>{{ aCard.modality }}</td>
           <td>{{ aCard.element }}</td>
           <td>{{ aCard.planet }}</td>
